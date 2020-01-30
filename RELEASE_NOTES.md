@@ -1,2 +1,2 @@
-## 1.0-SNAPSHOT
-*   Created template for new repositories.
+## 0.1
+*   added pulling zip file, unzip it and save to the same place
