@@ -32,7 +32,7 @@ The packaged file will be present in your `target/` folder.
 Planning to add:
 *   removing zip file after unzip it
 *   process only .zip files
-*   added test for unzip process
+*   added test for unzip process(DONE)
 
 ## Release Notes
 Can be found in [RELEASE_NOTES](RELEASE_NOTES.md).
