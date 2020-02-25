@@ -6,7 +6,7 @@
 
     <groupId>com.github.romankh3</groupId>
     <artifactId>aws-java-lambda-unzip</artifactId>
-    <version>0.1</version>
+    <version>0.3</version>
 
     <properties>
         <aws.java.sdk.s3.version>1.11.714</aws.java.sdk.s3.version>

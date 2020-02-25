@@ -30,8 +30,8 @@ The packaged file will be present in your `target/` folder.
 
 ## PLan
 Planning to add:
-*   removing zip file after unzip it
-*   process only .zip files
+*   removing zip file after unzip it(DONE)
+*   process only .zip files(DONE)
 *   added test for unzip process(DONE)
 
 ## Release Notes

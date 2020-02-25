@@ -1,6 +1,7 @@
 package com.github.romankh3.awslambda.s3.unzip;
 
 import static java.util.Collections.singletonList;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -22,6 +23,7 @@ import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import org.junit.Before;
@@ -82,10 +84,11 @@ public class AwsLambdaS3UnzipFilesTest {
     @Test
     public void shouldHandleRequest() throws IOException {
         //when
-        Boolean result = lambda.handleRequest(s3Event, context);
+        Map<S3Entity, Boolean> result = lambda.handleRequest(s3Event, context);
 
         //then
-        assertTrue(result);
+        assertEquals(1, result.size());
+        assertTrue(result.values().iterator().next());
 
         //and
         ZipInputStream zisForAssert = new ZipInputStream(new FileInputStream(zipFile));
