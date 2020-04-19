@@ -11,6 +11,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -58,7 +59,17 @@ public class AwsLambdaS3UnzipFilesTest {
         when(AmazonS3ClientBuilder.defaultClient()).thenReturn(amazonS3);
         lambda = new AwsLambdaS3UnzipFiles();
 
-        when(context.getLogger()).thenReturn(System.out::println);
+        when(context.getLogger()).thenReturn(new LambdaLogger() {
+            @Override
+            public void log(String message) {
+                System.out.println(message);
+            }
+
+            @Override
+            public void log(byte[] message) {
+                System.out.println(message);
+            }
+        });
         S3EventNotificationRecord record = mock(S3EventNotificationRecord.class);
 
         S3Entity s3Entity = mock(S3Entity.class);
