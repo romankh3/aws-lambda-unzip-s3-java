@@ -8,6 +8,9 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.event.S3EventNotification.S3Entity;
 import com.amazonaws.services.s3.event.S3EventNotification.S3EventNotificationRecord;
 import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.util.IOUtils;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +37,7 @@ public class AwsLambdaS3UnzipFiles implements RequestHandler<S3Event, Map<S3Enti
 
             if (isZipFile(s3Key, context)) {
                 unzip = unzipFile(s3Bucket, s3Key, context);
-                if(unzip) {
+                if (unzip) {
                     deleteZipFile(s3Bucket, s3Key, context);
                 }
             } else {
@@ -52,7 +55,10 @@ public class AwsLambdaS3UnzipFiles implements RequestHandler<S3Event, Map<S3Enti
         try (ZipInputStream zis = new ZipInputStream(s3Object.getObjectContent());) {
             ZipEntry zipEntry = zis.getNextEntry();
             while (zipEntry != null) {
-                amazonS3Client.putObject(s3Bucket, String.format("%s/%s", s3Key, zipEntry.getName()), zis, null);
+                ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+                IOUtils.copy(zis, arrayOutputStream);
+                amazonS3Client.putObject(s3Bucket, String.format("%s/%s", s3Key, zipEntry.getName()),
+                        new ByteArrayInputStream(arrayOutputStream.toByteArray()), null);
                 zipEntry = zis.getNextEntry();
             }
             zis.closeEntry();
