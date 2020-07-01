@@ -28,7 +28,7 @@ mvn clean package
 ```
 The packaged file will be present in your `target/` folder.
 
-## PLan
+## Plan
 Planning to add:
 *   removing zip file after unzip it(DONE)
 *   process only .zip files(DONE)
