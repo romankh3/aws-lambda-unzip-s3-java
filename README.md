@@ -26,6 +26,7 @@ Maven is already configured to package the .jar file correctly for deployment in
 ```
 mvn clean package
 ```
+
 The packaged file will be present in your `target/` folder.
 
 ## Plan
