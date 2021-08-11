@@ -9,7 +9,7 @@
     <version>0.3</version>
 
     <properties>
-        <aws.java.sdk.s3.version>1.12.8</aws.java.sdk.s3.version>
+        <aws.java.sdk.s3.version>1.12.27</aws.java.sdk.s3.version>
         <aws.lambda.java.events.version>2.2.9</aws.lambda.java.events.version>
         <aws.lambda.java.core.version>1.2.1</aws.lambda.java.core.version>
         <powermock.version>2.0.9</powermock.version>
